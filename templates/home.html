@@ -1,0 +1,114 @@
+{% extends 'components/navigate.html' %}
+{% block content %}
+{% if user.is_superuser %}
+
+  <div class="container-fluid my-5 bg-gradient">
+
+    <div class="row d-flex flex-row justify-content-around my-3">
+
+      <div class="card col-5">
+        <div class="card-body">
+          <h2 class="card-title">شهر ها</h2>
+          <p class="card-text">مشاهده و ویرایش شهر ها</p>
+          <a href="{% url 'city' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    
+      <div class="card col-5">
+        <div class="card-body">
+          <h2 class="card-title">انبار ها</h2>
+          <p class="card-text">مشاهده و ویرایش انبار ها</p>
+          <a href="{% url 'store' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end row -->
+
+    <div class="row d-flex flex-row justify-content-around my-3">
+
+      <div class="card col-5">
+        <div class="card-body">
+          <h2 class="card-title">دسته بندی</h2>
+          <p class="card-text">مشاهده و ویرایش دسته بندی محصولات</p>
+          <a href="{% url 'category' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    
+      <div class="card col-5">
+        <div class="card-body">
+          <h2 class="card-title">محصولات</h2>
+          <p class="card-text">مشاهده و ویرایش انواع محصولات</p>
+          <a href="{% url 'product' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+
+      <!-- end row -->
+
+      <div class="row d-flex flex-row justify-content-around my-3">
+
+        <div class="card col-5">
+          <div class="card-body">
+            <h2 class="card-title">موجودی انبار ها</h2>
+            <p class="card-text">مشاهده و ویرایش موجودی انبار ها</p>
+            <a href="{% url 'storeproduct' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      
+        <div class="card col-5">
+          <div class="card-body">
+            <h2 class="card-title">سفارش ها</h2>
+            <p class="card-text">مشاهده و ویرایش سفارش کاربران</p>
+            <a href="{% url 'order' %}" class="btn btn-primary">مشاهده<i class="fa fa-angle-left" aria-hidden="true"></i></a>
+          </div>
+        </div>
+  
+      </div>
+      <!-- end row -->
+
+
+  </div>
+
+{% else %}
+
+<div class="container-fluid my-5 bg-gradient">
+  <div class="row d-flex flex-row justify-content-around">
+    <h1 class="font-extrabold text-primary text-3xl m-10 text-center">به فروشگاه شهر آجیلی خوش آمدید</h1></h1>
+    {% for p in object_list %}
+        <div class="col-5 d-flex flex-wrap my-4">
+          <div class="card col-12">
+            <div class="card-body">
+              <img src="{{ p.name.img.url }}" alt="{{ p.img.name }}" class="card-img-top img-fluid"/>
+              <h2 class="card-title text-center py-3">{{ p.name }}</h2>
+              <div class="w-100 d-flex flex-row justify-content-center">
+                <p>مشخصات : </p>
+                <b class="text-primary px-2">بسته {{p.name.quantity}} گرمی</b>
+              </div>
+              <div class="w-100 d-flex flex-row justify-content-center">
+                <p>قیمت : </p>
+                <b class="text-primary px-2">{{ p.name.price }} تومان</b>
+              </div>
+              <div class="w-100 d-flex flex-row justify-content-center">
+                {% if p.quantity > 0 %}
+                  <p>موجودی انبار : </p>
+                  <b class="px-2 text-primary">{{ p.quantity }} بسته</b>
+                {% else %}
+                <p class="text-danger">ناموجود</p>
+                {% endif %}
+              </div>
+              <div class="w-100 d-flex justify-content-center">
+                <a {% if p.quantity == 0 %} disabled {% endif %} href="{% url 'userOrder' p.pk %}" class="btn btn-primary mx-auto px-5" >خرید</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endif %}
+
+{% endblock content %}
+

@@ -1,0 +1,50 @@
+{% extends 'components/navigate.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid my-5">
+
+  <div class="row">
+    <div class="col-6 d-flex justify-content-start title">
+      <p>سفارش کاربران</p>
+      
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>سفارش دهنده</th>
+        <th>انبار</th>
+        <th>محصول</th>
+        <th>تعداد</th>
+        <th>وضعیت سفارش</th>
+        <th class="text-end">عملیات</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in object_list %}
+      <tr>
+        <th>{{ order.username.username }}</th>
+        <th>{{ order.product.store }}</th>
+        <th>{{ order.product }}</th>
+        <th class="persian-digit">{{ order.quantity }}</th>
+        <th>{{ order.status }}</th>
+        <td scope="col">
+          <a href="{% url 'order_update' order.pk %}">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+          <a href="{% url 'order_delete' order.pk %}">
+            <i class="fa fa-trash-o px-3" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock content %}

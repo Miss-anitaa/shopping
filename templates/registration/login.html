@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block nav %}
+
+<section class="vh-100 bg-gradient">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body px-5 text-center">
+
+            <form method="post" class="pb-5">
+              {% csrf_token %}
+              <span class="text-error text-sm">{{ form.non_field_errors }}</span>
+
+              <h2 class="fw-bold mb-2 text-uppercase">ورود</h2>
+
+              <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typeEmailX">نام کاربری</label>
+                <input type="text" id="typeEmailX" class="form-control form-control-lg" name="username" />
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typePasswordX">رمز عبور</label>
+                <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password" />
+              </div>
+
+
+              <button class="btn btn-lg px-5 remove-btn" type="submit">ورود</button>
+
+            </form>
+
+            <div>
+              <p class="mb-0">حساب کاربری ندارید؟<a href="{% url 'signup' %}" class="text-white-50 fw-bold mx-5">ثبت نام کنید</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock nav %}

@@ -1,0 +1,48 @@
+{% extends 'components/navigate.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid my-5">
+
+  <div class="row">
+    <div class="col-6 d-flex justify-content-start title">
+      <p>موجودی انبار ها</p>
+      <a href="{% url 'storeproduct_new' %}" class="px-4">
+        <i class="fa fa-plus-square-o cursor-pointer" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>انبار</th>
+        <th>نام محصول</th>
+        <th>تعداد</th>
+        <th class="text-end">عملیات</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in object_list %}
+      <tr>
+        <th>{{ product.store }}</th>
+        <th>{{ product.name }}</th>
+        <th class="persian-digit">{{ product.quantity }}</th>
+        <td scope="col">
+          <a href="{% url 'storeproduct_delete' product.pk %}">
+            <i class="fa fa-trash-o px-3" aria-hidden="true"></i>
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+{% endblock content %}

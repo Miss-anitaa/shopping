@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>شهر آجیلی</title>
+    
+    <!-- <link rel="stylesheet" href="{% static 'src/output.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
+
+    
+  </head>
+  <body dir="rtl">
+    
+    {% block nav %} {% endblock nav %}
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    
+    <!-- persian numbers -->
+    <script>
+      persian = { 0: '۰', 1: '۱', 2: '۲', 3: '۳', 4: '۴', 5: '۵', 6: '۶', 7: '۷', 8: '۸', 9: '۹' };
+      $(".persian-digit").each(function () {
+        for (var i = 0; i <= 9; i++) {
+          var re = new RegExp(i, "g");
+          $(this).html($(this).html().replace(re, persian[i]));
+        }
+      });
+    </script>
+    
+  </body>
+</html>
